@@ -2,7 +2,7 @@ import { assemble, type Program } from './cpu/assembler.ts';
 import { EXAMPLES, type Example } from './cpu/programs.ts';
 
 export const GITHUB_PROFILE_URL = 'https://github.com/shivashanmugam';
-export const REPO_URL = 'https://github.com/shivashanmugam/linux-as-ui';
+export const REPO_URL = 'https://github.com/shivashanmugam/learn-linux-via-ui';
 export const COFFEE_URL = 'https://buymeacoffee.com/sivakannan';
 
 export type PageId = 'home' | 'big-picture' | 'processor';

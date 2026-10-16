@@ -6,7 +6,7 @@ result of the computation appears on the output.
 
 Built with **Vite 8**, **React 19** and **TypeScript 7**.
 
-**Live site:** https://shivashanmugam.github.io/linux-as-ui/
+**Live site:** https://shivashanmugam.github.io/learn-linux-via-ui/
 
 ## Pages
 
@@ -24,7 +24,7 @@ Part 1 also accepts `?slide=1..3`. Every page has a GitHub link in the header an
 
 ```bash
 npm install
-npm run dev      # dev server at http://localhost:5173/linux-as-ui/
+npm run dev      # dev server at http://localhost:5173/learn-linux-via-ui/
 npm run build    # type-check with tsc 7 and build all pages into dist/
 npm run preview  # serve the production build
 npm run lint     # oxlint
@@ -33,7 +33,7 @@ npm run lint     # oxlint
 ## Deploy
 
 `.github/workflows/deploy.yml` (at the repository root) builds this folder and publishes `dist/` to GitHub Pages on
-every push to `main`. The site is served from `/linux-as-ui/`, which is set as `base` in `vite.config.ts`. The repo's
+every push to `main`. The site is served from `/learn-linux-via-ui/`, which is set as `base` in `vite.config.ts`. The repo's
 **Settings → Pages → Source** must be set to **GitHub Actions**.
 
 ## What you can do

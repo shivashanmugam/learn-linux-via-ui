@@ -4,8 +4,8 @@ import { defineConfig } from 'vite';
 
 // https://vite.dev/config/
 export default defineConfig({
-  // Served from https://shivashanmugam.github.io/linux-as-ui/ on GitHub Pages.
-  base: '/linux-as-ui/',
+  // Served from https://shivashanmugam.github.io/learn-linux-via-ui/ on GitHub Pages.
+  base: '/learn-linux-via-ui/',
   plugins: [react()],
   build: {
     rolldownOptions: {
