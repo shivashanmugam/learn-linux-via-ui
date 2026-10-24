@@ -10,6 +10,7 @@ import { OutputPanel, TracePanel } from '../components/OutputTrace.tsx';
 import { ProgramEditor } from '../components/ProgramEditor.tsx';
 import { Concepts, IsaReference } from '../components/Reference.tsx';
 import { SiteLayout } from '../components/SiteLayout.tsx';
+import { ProcessorTour } from '../components/ProcessorTour.tsx';
 import { assembleOrThrow, pageHref, programParams, readSharedProgram, type SharedProgram } from '../site.ts';
 
 const speedToDelay = (speed: number): number => Math.round(1400 / speed ** 1.4);
@@ -79,6 +80,17 @@ export function ProcessorPage() {
           ALU computes, and how memory changes until the result appears on the output.
         </p>
       </header>
+
+      <ProcessorTour simulatorId="simulator" />
+
+      <div className="part-heading" id="simulator">
+        <span className="deck-kicker">Step 2 · Run the program</span>
+        <h2 className="deck-title">Watch the parts work together</h2>
+        <p>
+          Press <kbd>Step</kbd> to advance the clock one tick. The parts you just met light up as each instruction is
+          fetched, decoded and executed.
+        </p>
+      </div>
 
       <Concepts />
 

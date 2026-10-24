@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import type { ListingEntry, Program } from '../../cpu/assembler.ts';
 import { MEMORY_SIZE, opByCode, toBin } from '../../cpu/isa.ts';
 import { EXAMPLES, type Example } from '../../cpu/programs.ts';
+import { AssemblyExplainer } from './AssemblyExplainer.tsx';
 
 type DemoStep = { kind: 'source' } | { kind: 'pass1' } | { kind: 'encode'; index: number } | { kind: 'start' };
 
@@ -184,7 +185,12 @@ export function LoaderDemo({ program, exampleId, onPickExample, runHref }: Props
 
       <div className="demo-grid">
         <section className="demo-col">
-          <h4>① Source text</h4>
+          <h4 className="source-head">
+            ① Source text
+            <span className="lang-tag" title="Little Man Computer assembly language (LMC-style dialect). See the explanation below the demo.">
+              Little Man Computer (LMC) assembly
+            </span>
+          </h4>
           <pre className="demo-source">
             {sourceLines.map((raw, i) => {
               const entry = entryByLine.get(i + 1);
@@ -207,7 +213,7 @@ export function LoaderDemo({ program, exampleId, onPickExample, runHref }: Props
           {current.kind === 'source' && (
             <div className="encode-card">
               <p>
-                This is the program as <b>text</b>. To the CPU it is meaningless. It can only fetch <b>numbers</b> from
+                This is the program as <b>text</b>, written in <b>Little Man Computer (LMC) assembly language</b>. To the CPU it is meaningless. It can only fetch <b>numbers</b> from
                 <b> RAM</b>, and right now RAM is empty (all zeros).
               </p>
               <p>
@@ -305,6 +311,8 @@ export function LoaderDemo({ program, exampleId, onPickExample, runHref }: Props
           </div>
         </section>
       </div>
+
+      <AssemblyExplainer />
     </div>
   );
 }

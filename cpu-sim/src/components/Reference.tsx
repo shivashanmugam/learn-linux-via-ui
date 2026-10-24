@@ -2,7 +2,7 @@ import { OPS, toBin } from '../cpu/isa.ts';
 
 export function IsaReference() {
   return (
-    <section className="panel isa">
+    <section className="panel isa" id="instruction-set">
       <h2>Instruction set</h2>
       <p>
         Every instruction is one byte: the upper 4 bits are the <span className="opcode">opcode</span> (what to do) and the

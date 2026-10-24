@@ -51,7 +51,7 @@ export function ProgramEditor({ source, example, loaderDemoHref, onSourceChange,
         </div>
       )}
       <div className="syntax">
-        <span className="syntax-title">Syntax</span>
+        <span className="syntax-title">Syntax · LMC assembly</span>
         <span>
           <code>label: OP operand</code> instruction
         </span>

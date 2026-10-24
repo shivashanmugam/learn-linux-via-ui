@@ -61,7 +61,16 @@ function RegValue({ x, y, value, bits = 8 }: { x: number; y: number; value: numb
   );
 }
 
-export function CpuDiagram({ cpu }: { cpu: CpuState }) {
+interface DiagramProps {
+  cpu: CpuState;
+  /** When set, clicking a part of the diagram reports which unit was clicked. */
+  onUnitClick?: (unit: Unit) => void;
+  className?: string;
+}
+
+const UNIT_CLASS = /^unit-(pc|ir|decoder|flags|mar|mdr|acc|alu|out|ram)$/;
+
+export function CpuDiagram({ cpu, onUnitClick, className }: DiagramProps) {
   const ev = cpu.lastEvent;
   const active = new Set<Unit>(ev?.units ?? []);
   const activeEdges = new Set<Edge>(ev?.edges ?? []);
@@ -77,7 +86,20 @@ export function CpuDiagram({ cpu }: { cpu: CpuState }) {
   const phase = cpu.halted ? 'halted' : (ev?.phase ?? 'ready');
 
   return (
-    <svg className="cpu-diagram" viewBox="0 0 640 470" role="img" aria-label="Diagram of the processor">
+    <svg
+      className={`cpu-diagram${onUnitClick ? ' clickable' : ''}${className ? ` ${className}` : ''}`}
+      viewBox="0 0 640 470"
+      role="img"
+      aria-label="Diagram of the processor"
+      onClick={
+        onUnitClick &&
+        ((e) => {
+          const group = (e.target as Element).closest('.unit');
+          const match = group && [...group.classList].map((c) => UNIT_CLASS.exec(c)).find(Boolean);
+          if (match) onUnitClick(match[1] as Unit);
+        })
+      }
+    >
       <defs>
         <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
           <path d="M0 0 L10 5 L0 10 z" className="arrow-head" />
