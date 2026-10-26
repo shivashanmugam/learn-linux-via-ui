@@ -150,6 +150,20 @@ export function ProcessorPage() {
       </div>
 
       <IsaReference />
+
+      <section className="panel next-part">
+        <div>
+          <span className="deck-kicker">Up next · Part 3</span>
+          <h2 className="deck-title">But how does a real computer get its first program?</h2>
+          <p>
+            Here the program was simply placed in RAM for you. A real PC starts with empty RAM. Follow what happens from the
+            moment you press the power button until the operating system is running.
+          </p>
+        </div>
+        <a className="button primary" href={pageHref('boot')}>
+          Part 3 · Booting →
+        </a>
+      </section>
     </SiteLayout>
   );
 }

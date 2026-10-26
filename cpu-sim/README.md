@@ -1,8 +1,9 @@
 # Inside a tiny CPU
 
-An interactive, in-browser explanation of how a processor runs a program: how instructions stored in memory are
-fetched, decoded and executed, and how each instruction transforms the state of registers and memory until the
-result of the computation appears on the output.
+An interactive, in-browser explanation of how a computer works, from a single instruction to a running operating
+system: how instructions stored in memory are fetched, decoded and executed, how a PC boots from the power button
+to a login screen, and how the operating system keeps the machine alive with interrupts, system calls and a
+scheduler.
 
 Built with **Vite 8**, **React 19** and **TypeScript 7**.
 
@@ -12,13 +13,30 @@ Built with **Vite 8**, **React 19** and **TypeScript 7**.
 
 | Page | Path | Source |
 | --- | --- | --- |
-| Home (links to both parts) | `/` | `index.html` → `src/pages/HomePage.tsx` |
+| Home (links to all parts) | `/` | `index.html` → `src/pages/HomePage.tsx` |
 | Part 1 · The big picture | `/big-picture/` | `big-picture/index.html` → `src/pages/BigPicturePage.tsx` |
 | Part 2 · Watch the processor run the program | `/processor/` | `processor/index.html` → `src/pages/ProcessorPage.tsx` |
+| Part 3 · From power button to operating system | `/boot/` | `boot/index.html` → `src/pages/BootPage.tsx` |
+| Part 4 · How the OS keeps the computer alive | `/live/` | `live/index.html` → `src/pages/LivePage.tsx` |
 
 The pages pass the selected program to each other in the URL (`?example=countdown` or `?src=<program text>`).
-Part 1 also accepts `?slide=1..3`. Every page has a GitHub link in the header and a Buy me a coffee link in the footer
-(see `src/site.ts` and `src/components/SiteLayout.tsx`).
+Part 1 also accepts `?slide=1..3` and Part 3 accepts `?stage=1..13`. Every page has a GitHub link in the header and a
+Buy me a coffee link in the footer (see `src/site.ts` and `src/components/SiteLayout.tsx`).
+
+### Part 3 · Booting
+
+A step-by-step walk through 13 stages of a typical x86-64 PC with UEFI firmware booting Linux: standby power, the
+power button, Power Good and the CPU reset vector, firmware RAM init and POST, boot selection and Secure Boot, GRUB,
+kernel start (page tables, interrupt table, timer), drivers and initramfs, systemd (PID 1), and the login screen.
+A motherboard diagram shows which parts are active, a RAM map shows what is loaded (and freed), and an arrow shows
+where the CPU's instruction pointer is executing. The stages are plain data in `src/boot/stages.ts`.
+
+### Part 4 · A live machine
+
+A deterministic simulation (`src/live/scheduler.ts`, 1 step = 1 ms) of one CPU core shared by a few processes:
+timer interrupts every 4 ms, a round-robin scheduler with an 8 ms slice, keyboard and disk interrupts, the `read`,
+`nanosleep`, `write` and `exit` system calls, and the idle `HLT`. You can type into the simulated text editor and
+follow each keystroke through interrupt → kernel driver → scheduler → app.
 
 ## Run it
 
@@ -89,6 +107,8 @@ Assembler syntax: `label: OP operand`, `label: DAT value`, comments start with `
 - `src/cpu/programs.ts` – example programs
 - `src/hooks/useSimulator.ts` – simulation state, history (undo) and run loop
 - `src/components/intro/` – intro slide deck: what is compute, program journey, assemble & load demo
-- `src/pages/`, `src/entries/` – the three pages and their entry scripts
+- `src/pages/`, `src/entries/` – the five pages and their entry scripts
 - `src/site.ts`, `src/components/SiteLayout.tsx` – links, URL helpers, shared header and footer
+- `src/boot/stages.ts`, `src/components/boot/` – Part 3 boot stages, motherboard diagram, monitor and boot log
+- `src/live/`, `src/components/live/` – Part 4 scheduler simulation, CPU timeline, editor app and process table
 - `src/components/` – processor diagram, memory view, narration, controls, trace, editor, reference

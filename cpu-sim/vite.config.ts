@@ -13,6 +13,8 @@ export default defineConfig({
         home: resolve(import.meta.dirname, 'index.html'),
         'big-picture': resolve(import.meta.dirname, 'big-picture/index.html'),
         processor: resolve(import.meta.dirname, 'processor/index.html'),
+        boot: resolve(import.meta.dirname, 'boot/index.html'),
+        live: resolve(import.meta.dirname, 'live/index.html'),
       },
     },
   },

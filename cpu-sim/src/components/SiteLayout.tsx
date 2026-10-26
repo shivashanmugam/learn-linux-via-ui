@@ -1,5 +1,5 @@
 import type { ReactNode } from 'react';
-import { COFFEE_URL, GITHUB_PROFILE_URL, PAGES, REPO_URL, pageHref, type PageId } from '../site.ts';
+import { COFFEE_URL, GITHUB_PROFILE_URL, PAGES, PART_ORDER, REPO_URL, pageHref, type PageId } from '../site.ts';
 
 function GitHubIcon() {
   return (
@@ -19,7 +19,7 @@ function SiteHeader({ current }: { current: PageId }) {
         Inside a tiny CPU
       </a>
       <nav className="site-nav" aria-label="Pages">
-        {(['big-picture', 'processor'] as const).map((id) => (
+        {PART_ORDER.map((id) => (
           <a key={id} href={pageHref(id)} aria-current={current === id ? 'page' : undefined}>
             {PAGES[id].short}
           </a>
